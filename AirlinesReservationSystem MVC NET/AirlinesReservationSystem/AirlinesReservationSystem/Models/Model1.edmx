@@ -1,0 +1,271 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="FlightReservationSystemContextModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Flight">
+          <Key>
+            <PropertyRef Name="flightId" />
+          </Key>
+          <Property Name="flightId" Type="int" Nullable="false" />
+          <Property Name="flightName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="seatFirstclass" Type="int" Nullable="false" />
+          <Property Name="seatBusinessclass" Type="int" Nullable="false" />
+          <Property Name="seatEconomyclass" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="paymentId" />
+          </Key>
+          <Property Name="paymentId" Type="int" Nullable="false" />
+          <Property Name="paymentMode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="bankDetails" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="totalAmount" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Schedule">
+          <Key>
+            <PropertyRef Name="scheduleId" />
+          </Key>
+          <Property Name="scheduleId" Type="int" Nullable="false" />
+          <Property Name="flightId" Type="int" Nullable="false" />
+          <Property Name="source" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="sourceId" Type="int" Nullable="false" />
+          <Property Name="dest" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="destId" Type="int" Nullable="false" />
+          <Property Name="scheduleDate" Type="date" Nullable="false" />
+          <Property Name="depatureTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="arrivalDate" Type="date" Nullable="false" />
+          <Property Name="arrivalTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="status" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FCseats" Type="int" Nullable="false" />
+          <Property Name="BCseats" Type="int" Nullable="false" />
+          <Property Name="ECseats" Type="int" Nullable="false" />
+          <Property Name="costFirst" Type="float" Nullable="false" />
+          <Property Name="costBusiness" Type="float" Nullable="false" />
+          <Property Name="costEconomy" Type="float" Nullable="false" />
+          <Property Name="traveltype" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ticket">
+          <Key>
+            <PropertyRef Name="ticketId" />
+          </Key>
+          <Property Name="ticketId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="flightId" Type="int" Nullable="false" />
+          <Property Name="scheduleId" Type="int" Nullable="false" />
+          <Property Name="paymentId" Type="int" Nullable="false" />
+          <Property Name="dateOfJourney" Type="date" Nullable="false" />
+          <Property Name="seatNo" Type="int" Nullable="false" />
+          <Property Name="passengerName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="gender" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="phoneNumber" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="address" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="travelclass" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="emergencyContact" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'FlightReservationSystemContext.dbo.Users' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="Password" />
+          </Key>
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="FlightReservationSystemContextModelStoreContainer">
+          <EntitySet Name="Flight" EntityType="Self.Flight" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ticket" EntityType="Self.Ticket" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Users].[Email] AS [Email], 
+    [Users].[Password] AS [Password]
+    FROM [dbo].[Users] AS [Users]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FlightReservationSystemContextModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Flight">
+          <Key>
+            <PropertyRef Name="flightId" />
+          </Key>
+          <Property Name="flightId" Type="Int32" Nullable="false" />
+          <Property Name="flightName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="seatFirstclass" Type="Int32" Nullable="false" />
+          <Property Name="seatBusinessclass" Type="Int32" Nullable="false" />
+          <Property Name="seatEconomyclass" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="paymentId" />
+          </Key>
+          <Property Name="paymentId" Type="Int32" Nullable="false" />
+          <Property Name="paymentMode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="bankDetails" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="totalAmount" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Schedule">
+          <Key>
+            <PropertyRef Name="scheduleId" />
+          </Key>
+          <Property Name="scheduleId" Type="Int32" Nullable="false" />
+          <Property Name="flightId" Type="Int32" Nullable="false" />
+          <Property Name="source" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sourceId" Type="Int32" Nullable="false" />
+          <Property Name="dest" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="destId" Type="Int32" Nullable="false" />
+          <Property Name="scheduleDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="depatureTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="arrivalDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="arrivalTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FCseats" Type="Int32" Nullable="false" />
+          <Property Name="BCseats" Type="Int32" Nullable="false" />
+          <Property Name="ECseats" Type="Int32" Nullable="false" />
+          <Property Name="costFirst" Type="Double" Nullable="false" />
+          <Property Name="costBusiness" Type="Double" Nullable="false" />
+          <Property Name="costEconomy" Type="Double" Nullable="false" />
+          <Property Name="traveltype" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ticket">
+          <Key>
+            <PropertyRef Name="ticketId" />
+          </Key>
+          <Property Name="ticketId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="flightId" Type="Int32" Nullable="false" />
+          <Property Name="scheduleId" Type="Int32" Nullable="false" />
+          <Property Name="paymentId" Type="Int32" Nullable="false" />
+          <Property Name="dateOfJourney" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="seatNo" Type="Int32" Nullable="false" />
+          <Property Name="passengerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="gender" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="phoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="travelclass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="emergencyContact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="Password" />
+          </Key>
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Flights" EntityType="Self.Flight" />
+          <EntitySet Name="Payments" EntityType="Self.Payment" />
+          <EntitySet Name="Schedules" EntityType="Self.Schedule" />
+          <EntitySet Name="Tickets" EntityType="Self.Ticket" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FlightReservationSystemContextModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Flights">
+            <EntityTypeMapping TypeName="FlightReservationSystemContextModel.Flight">
+              <MappingFragment StoreEntitySet="Flight">
+                <ScalarProperty Name="flightId" ColumnName="flightId" />
+                <ScalarProperty Name="flightName" ColumnName="flightName" />
+                <ScalarProperty Name="seatFirstclass" ColumnName="seatFirstclass" />
+                <ScalarProperty Name="seatBusinessclass" ColumnName="seatBusinessclass" />
+                <ScalarProperty Name="seatEconomyclass" ColumnName="seatEconomyclass" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="FlightReservationSystemContextModel.Payment">
+              <MappingFragment StoreEntitySet="Payment">
+                <ScalarProperty Name="paymentId" ColumnName="paymentId" />
+                <ScalarProperty Name="paymentMode" ColumnName="paymentMode" />
+                <ScalarProperty Name="bankDetails" ColumnName="bankDetails" />
+                <ScalarProperty Name="totalAmount" ColumnName="totalAmount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Schedules">
+            <EntityTypeMapping TypeName="FlightReservationSystemContextModel.Schedule">
+              <MappingFragment StoreEntitySet="Schedule">
+                <ScalarProperty Name="scheduleId" ColumnName="scheduleId" />
+                <ScalarProperty Name="flightId" ColumnName="flightId" />
+                <ScalarProperty Name="source" ColumnName="source" />
+                <ScalarProperty Name="sourceId" ColumnName="sourceId" />
+                <ScalarProperty Name="dest" ColumnName="dest" />
+                <ScalarProperty Name="destId" ColumnName="destId" />
+                <ScalarProperty Name="scheduleDate" ColumnName="scheduleDate" />
+                <ScalarProperty Name="depatureTime" ColumnName="depatureTime" />
+                <ScalarProperty Name="arrivalDate" ColumnName="arrivalDate" />
+                <ScalarProperty Name="arrivalTime" ColumnName="arrivalTime" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="FCseats" ColumnName="FCseats" />
+                <ScalarProperty Name="BCseats" ColumnName="BCseats" />
+                <ScalarProperty Name="ECseats" ColumnName="ECseats" />
+                <ScalarProperty Name="costFirst" ColumnName="costFirst" />
+                <ScalarProperty Name="costBusiness" ColumnName="costBusiness" />
+                <ScalarProperty Name="costEconomy" ColumnName="costEconomy" />
+                <ScalarProperty Name="traveltype" ColumnName="traveltype" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tickets">
+            <EntityTypeMapping TypeName="FlightReservationSystemContextModel.Ticket">
+              <MappingFragment StoreEntitySet="Ticket">
+                <ScalarProperty Name="ticketId" ColumnName="ticketId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="flightId" ColumnName="flightId" />
+                <ScalarProperty Name="scheduleId" ColumnName="scheduleId" />
+                <ScalarProperty Name="paymentId" ColumnName="paymentId" />
+                <ScalarProperty Name="dateOfJourney" ColumnName="dateOfJourney" />
+                <ScalarProperty Name="seatNo" ColumnName="seatNo" />
+                <ScalarProperty Name="passengerName" ColumnName="passengerName" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="travelclass" ColumnName="travelclass" />
+                <ScalarProperty Name="emergencyContact" ColumnName="emergencyContact" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="FlightReservationSystemContextModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

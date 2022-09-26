@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FlightReservationSystemContextModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Flight">
+    <Key>
+      <PropertyRef Name="flightId" />
+    </Key>
+    <Property Name="flightId" Type="Int32" Nullable="false" />
+    <Property Name="flightName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="seatFirstclass" Type="Int32" Nullable="false" />
+    <Property Name="seatBusinessclass" Type="Int32" Nullable="false" />
+    <Property Name="seatEconomyclass" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="paymentId" />
+    </Key>
+    <Property Name="paymentId" Type="Int32" Nullable="false" />
+    <Property Name="paymentMode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="bankDetails" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="totalAmount" Type="Double" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Schedule">
+    <Key>
+      <PropertyRef Name="scheduleId" />
+    </Key>
+    <Property Name="scheduleId" Type="Int32" Nullable="false" />
+    <Property Name="flightId" Type="Int32" Nullable="false" />
+    <Property Name="source" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="sourceId" Type="Int32" Nullable="false" />
+    <Property Name="dest" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="destId" Type="Int32" Nullable="false" />
+    <Property Name="scheduleDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="depatureTime" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="arrivalDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="arrivalTime" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FCseats" Type="Int32" Nullable="false" />
+    <Property Name="BCseats" Type="Int32" Nullable="false" />
+    <Property Name="ECseats" Type="Int32" Nullable="false" />
+    <Property Name="costFirst" Type="Double" Nullable="false" />
+    <Property Name="costBusiness" Type="Double" Nullable="false" />
+    <Property Name="costEconomy" Type="Double" Nullable="false" />
+    <Property Name="traveltype" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Ticket">
+    <Key>
+      <PropertyRef Name="ticketId" />
+    </Key>
+    <Property Name="ticketId" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="flightId" Type="Int32" Nullable="false" />
+    <Property Name="scheduleId" Type="Int32" Nullable="false" />
+    <Property Name="paymentId" Type="Int32" Nullable="false" />
+    <Property Name="dateOfJourney" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="seatNo" Type="Int32" Nullable="false" />
+    <Property Name="passengerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="gender" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="phoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="travelclass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="emergencyContact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Email" />
+      <PropertyRef Name="Password" />
+    </Key>
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Flights" EntityType="Self.Flight" />
+    <EntitySet Name="Payments" EntityType="Self.Payment" />
+    <EntitySet Name="Schedules" EntityType="Self.Schedule" />
+    <EntitySet Name="Tickets" EntityType="Self.Ticket" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FlightReservationSystemContextModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Flight">
+    <Key>
+      <PropertyRef Name="flightId" />
+    </Key>
+    <Property Name="flightId" Type="int" Nullable="false" />
+    <Property Name="flightName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="seatFirstclass" Type="int" Nullable="false" />
+    <Property Name="seatBusinessclass" Type="int" Nullable="false" />
+    <Property Name="seatEconomyclass" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="paymentId" />
+    </Key>
+    <Property Name="paymentId" Type="int" Nullable="false" />
+    <Property Name="paymentMode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="bankDetails" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="totalAmount" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Schedule">
+    <Key>
+      <PropertyRef Name="scheduleId" />
+    </Key>
+    <Property Name="scheduleId" Type="int" Nullable="false" />
+    <Property Name="flightId" Type="int" Nullable="false" />
+    <Property Name="source" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="sourceId" Type="int" Nullable="false" />
+    <Property Name="dest" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="destId" Type="int" Nullable="false" />
+    <Property Name="scheduleDate" Type="date" Nullable="false" />
+    <Property Name="depatureTime" Type="time" Precision="7" Nullable="false" />
+    <Property Name="arrivalDate" Type="date" Nullable="false" />
+    <Property Name="arrivalTime" Type="time" Precision="7" Nullable="false" />
+    <Property Name="status" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="FCseats" Type="int" Nullable="false" />
+    <Property Name="BCseats" Type="int" Nullable="false" />
+    <Property Name="ECseats" Type="int" Nullable="false" />
+    <Property Name="costFirst" Type="float" Nullable="false" />
+    <Property Name="costBusiness" Type="float" Nullable="false" />
+    <Property Name="costEconomy" Type="float" Nullable="false" />
+    <Property Name="traveltype" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Ticket">
+    <Key>
+      <PropertyRef Name="ticketId" />
+    </Key>
+    <Property Name="ticketId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="flightId" Type="int" Nullable="false" />
+    <Property Name="scheduleId" Type="int" Nullable="false" />
+    <Property Name="paymentId" Type="int" Nullable="false" />
+    <Property Name="dateOfJourney" Type="date" Nullable="false" />
+    <Property Name="seatNo" Type="int" Nullable="false" />
+    <Property Name="passengerName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="gender" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="phoneNumber" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="address" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="travelclass" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="emergencyContact" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'FlightReservationSystemContext.dbo.Users' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Email" />
+      <PropertyRef Name="Password" />
+    </Key>
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="FlightReservationSystemContextModelStoreContainer">
+    <EntitySet Name="Flight" EntityType="Self.Flight" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ticket" EntityType="Self.Ticket" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Users].[Email] AS [Email], 
+    [Users].[Password] AS [Password]
+    FROM [dbo].[Users] AS [Users]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>
